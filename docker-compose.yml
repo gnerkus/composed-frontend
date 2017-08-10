@@ -1,0 +1,15 @@
+version: "3"
+
+services:
+  node:
+    build: ./node
+    links:
+      - redis-data
+    ports:
+      - "1337:1337"
+    volumes:
+      - ./node:/src:rw
+  redis-data:
+    image: redis
+    ports:
+      - 6379
