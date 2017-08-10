@@ -1,0 +1,15 @@
+{
+  "name": "composed-frontend-node",
+  "version": "0.1.0",
+  "description": "Node microservice for composing a frontend",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index"
+  },
+  "author": " <oraelosi@fielmann-ventures.com>",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.15.4",
+    "redis": "^2.8.0"
+  }
+}
