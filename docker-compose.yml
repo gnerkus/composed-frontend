@@ -6,7 +6,7 @@ services:
     links:
       - redis-data
     ports:
-      - "1337:1337"
+      - 1337
     volumes:
       - ./projects:/src:rw
   todos:
@@ -14,7 +14,7 @@ services:
     links:
       - redis-data
     ports:
-      - "1447:1447"
+      - 1447
     volumes:
       - ./todos:/src:rw
   client:
@@ -23,9 +23,20 @@ services:
       - projects
       - todos
     ports:
-      - "1557:1557"
+      - 1557
     volumes:
       - ./client:/src:rw
+  reverseproxy:
+    build: ./proxy
+    links:
+      - projects
+      - todos
+      - client
+    ports:
+      - 1337:1337
+      - 1447:1447
+      - 1557:1557
+    restart: always
   redis-data:
     image: redis
     ports:
