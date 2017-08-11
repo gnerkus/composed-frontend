@@ -1,0 +1,15 @@
+{
+  "name": "todos",
+  "version": "0.1.0",
+  "description": "list todos",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index"
+  },
+  "author": "<oraelosi@fielmann-ventures.com>",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.15.4",
+    "redis": "^2.8.0"
+  }
+}

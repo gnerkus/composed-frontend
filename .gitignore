@@ -1,16 +1,20 @@
 # Logs
 logs
 *.log
-node/npm-debug.log*
+projects/npm-debug.log*
+todos/npm-debug.log*
 
 # Dependency directories
-node/node_modules
+projects/node_modules
+todos/node_modules
 
 # Optional npm cache directory
-node/.npm
+projects/.npm
+todos/.npm
 
 # Optional REPL history
-node/.node_repl_history
+projects/.node_repl_history
+todos/.node_repl_history
 
 # Visual Studio Code files
 .vscode

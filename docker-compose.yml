@@ -1,14 +1,22 @@
 version: "3"
 
 services:
-  node:
-    build: ./node
+  projects:
+    build: ./projects
     links:
       - redis-data
     ports:
       - "1337:1337"
     volumes:
-      - ./node:/src:rw
+      - ./projects:/src:rw
+  todos:
+    build: ./todos
+    links:
+      - redis-data
+    ports:
+      - "1447:1447"
+    volumes:
+      - ./todos:/src:rw
   redis-data:
     image: redis
     ports:

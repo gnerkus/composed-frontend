@@ -5,10 +5,10 @@ const redis = require('redis')
 const app = express()
 // Using host entries created by Docker in /etc/hosts (RECOMMENDED)
 const redisClient = redis.createClient('6379', 'redis-data')
-const PORT = process.env.PORT || 1337
+const PORT = process.env.PORT || 1447
 
 app.get('/', (req, res, next) =>
-  redisClient.incr('counter', (err, counter) => {
+  redisClient.incr('todos', (err, counter) => {
     if (err) return next(err)
     res.send(`This page has been viewed ${counter} times!`)
   })
