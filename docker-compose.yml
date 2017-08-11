@@ -17,6 +17,15 @@ services:
       - "1447:1447"
     volumes:
       - ./todos:/src:rw
+  client:
+    build: ./client
+    links:
+      - projects
+      - todos
+    ports:
+      - "1557:1557"
+    volumes:
+      - ./client:/src:rw
   redis-data:
     image: redis
     ports:

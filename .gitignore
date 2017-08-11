@@ -3,18 +3,22 @@ logs
 *.log
 projects/npm-debug.log*
 todos/npm-debug.log*
+client/npm-debug.log*
 
 # Dependency directories
 projects/node_modules
 todos/node_modules
+client/node_modules
 
 # Optional npm cache directory
 projects/.npm
 todos/.npm
+client/.npm
 
 # Optional REPL history
 projects/.node_repl_history
 todos/.node_repl_history
+client/.node_repl_history
 
 # Visual Studio Code files
 .vscode
