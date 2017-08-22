@@ -13,11 +13,11 @@
   <script>
     var todoUpdateBtn = document.getElementById("todosupdate")
     var todoResetBtn = document.getElementById("todosreset")
-    var colorBtns = document.querySelectorAll(".tbox")
-    var colorBox = document.getElementById("todosbox")
+    var todoColorBtns = document.querySelectorAll(".tbox")
+    var todoColorBox = document.getElementById("todosbox")
 
     Array.prototype.forEach.call(
-      colorBtns,
+      todoColorBtns,
       (el, idx) => {
         el.addEventListener('click', () => {
           const btnColor = el.dataset.color
@@ -42,7 +42,7 @@
 
     todoUpdateBtn.addEventListener('click', () => {
       fetch('http://localhost:1557/todos', {
-        method: 'GET',
+        method: 'PUT',
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
@@ -53,9 +53,9 @@
       })
       .then(resJson => {
 
-        colorBox.className = ''
-        colorBox.classList.add('big-box')
-        colorBox.classList.add(resJson.color)
+        todoColorBox.className = ''
+        todoColorBox.classList.add('big-box')
+        todoColorBox.classList.add(resJson.color)
       })
     })
 

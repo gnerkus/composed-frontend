@@ -13,11 +13,11 @@
   <script>
     var projUpdateBtn = document.getElementById("projectsupdate")
     var projResetBtn = document.getElementById("projectsreset")
-    var colorBtns = document.querySelectorAll(".pbox")
-    var colorBox = document.getElementById("projectsbox")
+    var projColorBtns = document.querySelectorAll(".pbox")
+    var projColorBox = document.getElementById("projectsbox")
 
     Array.prototype.forEach.call(
-      colorBtns,
+      projColorBtns,
       (el, idx) => {
         el.addEventListener('click', () => {
           const btnColor = el.dataset.color
@@ -41,8 +41,8 @@
     )
 
     projUpdateBtn.addEventListener('click', () => {
-      fetch('http://localhost:1557/projects/update', {
-        method: 'GET',
+      fetch('http://localhost:1557/projects', {
+        method: 'PUT',
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
@@ -53,9 +53,9 @@
       })
       .then(resJson => {
 
-        colorBox.className = ''
-        colorBox.classList.add('big-box')
-        colorBox.classList.add(resJson.color)
+        projColorBox.className = ''
+        projColorBox.classList.add('big-box')
+        projColorBox.classList.add(resJson.color)
       })
     })
 

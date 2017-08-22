@@ -5,6 +5,7 @@ const path = require('path')
 const RedisSMQ = require('rsmq')
 
 const app = express()
+
 app.use(bodyParser.json())
 // Using host entries created by Docker in /etc/hosts (RECOMMENDED)
 // const redisClient = redis.createClient('6379', 'redis-data')
@@ -38,10 +39,10 @@ app.post('/', (req, res, next) => {
   })
 })
 
-app.get('/update', (req, res, next) => {
+app.put('/', (req, res, next) => {
   rsmqClient.receiveMessage({qname: 'colorupdate'}, (err, resp) => {
     if (resp.id) {
-      res.json({color: resp})
+      res.json({color: resp.message})
     } else {
       res.json({color: 'black-box'})
     }
