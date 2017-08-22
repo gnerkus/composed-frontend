@@ -2,11 +2,13 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const path = require('path')
 // const redis = require('redis')
+const RedisSMQ = require('rsmq')
 
 const app = express()
 app.use(bodyParser.json())
 // Using host entries created by Docker in /etc/hosts (RECOMMENDED)
 // const redisClient = redis.createClient('6379', 'redis-data')
+const rsmqClient = new RedisSMQ({host: 'redis-data', port: 6379, ns: 'cf'})
 const PORT = process.env.PORT || 1447
 
 app.get('/', (req, res, next) =>
@@ -19,8 +21,25 @@ app.get('/', (req, res, next) =>
   // HTML page depending on the message received
 )
 
-app.post('/projects', (req, res, next) => {
-  res.json(req.body)
+app.post('/', (req, res, next) => {
+  rsmqClient.sendMessage({qname: 'colorupdate', message: req.body.color}, (err, resp) => {
+    if (resp) {
+      console.log(`Message sent. ID: ${resp}`)
+      res.json({msgstatus: 'sent', msgid: resp})
+    } else {
+      res.json({msgstatus: 'not sent'})
+    }
+  })
+})
+
+app.get('/update', (req, res, next) => {
+  rsmqClient.receiveMessage({qname: 'colorupdate'}, (err, resp) => {
+    if (resp.id) {
+      res.json({color: resp})
+    } else {
+      res.json({color: 'black-box'})
+    }
+  })
 })
 
 app

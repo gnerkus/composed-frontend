@@ -5,12 +5,14 @@
       <div id="projectsbox" class="big-box"></div>
       <button id="projectsupdate">Update projects</button>
     </div>
+    <div class="wide-box" id="projectsreset">Reset</div>
     <div class="small-box red-box pbox" data-color="red-box">v</div>
     <div class="small-box blue-box pbox" data-color="blue-box">v</div>
     <div class="small-box yellow-box pbox" data-color="yellow-box">v</div>
   </div>
   <script>
     var projUpdateBtn = document.getElementById("projectsupdate")
+    var projResetBtn = document.getElementById("projectsreset")
     var colorBtns = document.querySelectorAll(".pbox")
     var colorBox = document.getElementById("projectsbox")
 
@@ -19,7 +21,7 @@
       (el, idx) => {
         el.addEventListener('click', () => {
           const btnColor = el.dataset.color
-          fetch('http://localhost:1337/todos', {
+          fetch('http://localhost:1557/todos', {
             method: 'POST',
             headers: {
               'Accept': 'application/json',
@@ -39,7 +41,7 @@
     )
 
     projUpdateBtn.addEventListener('click', () => {
-      fetch('http://localhost:1337/projects', {
+      fetch('http://localhost:1557/projects/update', {
         method: 'GET',
         headers: {
           'Accept': 'application/json',
@@ -55,6 +57,24 @@
         colorBox.classList.add('big-box')
         colorBox.classList.add(resJson.color)
       })
+    })
+
+    projResetBtn.addEventListener('click', () => {
+      fetch('http://localhost:1557/projects', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          color: 'white-box'
+        })
+      })
+      .then(res => {
+        return res.json()
+      })
+      .then(resJson => console.log(resJson))
+      .catch(err => console.log(err))
     })
   </script>
 </body>

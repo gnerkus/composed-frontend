@@ -5,12 +5,14 @@
       <div id="todosbox" class="big-box"></div>
       <button id="todosupdate">Update todos</button>
     </div>
-    <div class="small-box purple-box tbox" data-color="purple-box">v</div>
-    <div class="small-box green-box tbox" data-color="green-box">v</div>
-    <div class="small-box orange-box tbox" data-color="orange-box">v</div>
+    <div class="wide-button" id="todosreset">Reset</div>
+    <div class="small-box purple-box tbox" data-color="purple-box">^</div>
+    <div class="small-box green-box tbox" data-color="green-box">^</div>
+    <div class="small-box orange-box tbox" data-color="orange-box">^</div>
   </div>
   <script>
     var todoUpdateBtn = document.getElementById("todosupdate")
+    var todoResetBtn = document.getElementById("todosreset")
     var colorBtns = document.querySelectorAll(".tbox")
     var colorBox = document.getElementById("todosbox")
 
@@ -19,7 +21,7 @@
       (el, idx) => {
         el.addEventListener('click', () => {
           const btnColor = el.dataset.color
-          fetch('http://localhost:1447/projects', {
+          fetch('http://localhost:1557/projects', {
             method: 'POST',
             headers: {
               'Accept': 'application/json',
@@ -38,8 +40,8 @@
       }
     )
 
-    projUpdateBtn.addEventListener('click', () => {
-      fetch('http://localhost:1447/todos', {
+    todoUpdateBtn.addEventListener('click', () => {
+      fetch('http://localhost:1557/todos', {
         method: 'GET',
         headers: {
           'Accept': 'application/json',
@@ -55,6 +57,24 @@
         colorBox.classList.add('big-box')
         colorBox.classList.add(resJson.color)
       })
+    })
+
+    todoResetBtn.addEventListener('click', () => {
+      fetch('http://localhost:1557/todos', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          color: 'white-box'
+        })
+      })
+      .then(res => {
+        return res.json()
+      })
+      .then(resJson => console.log(resJson))
+      .catch(err => console.log(err))
     })
   </script>
 </body>

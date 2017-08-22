@@ -13,6 +13,7 @@ services:
     build: ./todos
     links:
       - redis-data
+      - projects
     ports:
       - 1447
     volumes:
