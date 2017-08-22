@@ -1,0 +1,60 @@
+<body>
+  <div>
+    <h2>Projects service</h2>
+    <div class="container">
+      <div id="projectsbox" class="big-box"></div>
+      <button id="projectsupdate">Update projects</button>
+    </div>
+    <div class="small-box red-box pbox" data-color="red-box">v</div>
+    <div class="small-box blue-box pbox" data-color="blue-box">v</div>
+    <div class="small-box yellow-box pbox" data-color="yellow-box">v</div>
+  </div>
+  <script>
+    var projUpdateBtn = document.getElementById("projectsupdate")
+    var colorBtns = document.querySelectorAll(".pbox")
+    var colorBox = document.getElementById("projectsbox")
+
+    Array.prototype.forEach.call(
+      colorBtns,
+      (el, idx) => {
+        el.addEventListener('click', () => {
+          const btnColor = el.dataset.color
+          fetch('http://localhost:1337/todos', {
+            method: 'POST',
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              color: btnColor
+            })
+          })
+          .then(res => {
+            return res.json()
+          })
+          .then(resJson => console.log(resJson))
+          .catch(err => console.log(err))
+        })
+      }
+    )
+
+    projUpdateBtn.addEventListener('click', () => {
+      fetch('http://localhost:1337/projects', {
+        method: 'GET',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        }
+      })
+      .then(res => {
+        return res.json()
+      })
+      .then(resJson => {
+
+        colorBox.className = ''
+        colorBox.classList.add('big-box')
+        colorBox.classList.add(resJson.color)
+      })
+    })
+  </script>
+</body>

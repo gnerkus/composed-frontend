@@ -9,6 +9,7 @@
   "author": "<oraelosi@fielmann-ventures.com>",
   "license": "MIT",
   "dependencies": {
+    "body-parser": "^1.17.2",
     "express": "^4.15.4",
     "redis": "^2.8.0"
   }
