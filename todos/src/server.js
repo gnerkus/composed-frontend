@@ -13,7 +13,7 @@ app.use(bodyParser.json())
 const server = new Server(app)
 
 const rsmqClient = new RedisSMQ({host: 'redis-data', port: 6379, ns: 'cf'})
-const PORT = process.env.PORT || 1337
+const PORT = process.env.PORT || 1447
 
 app.set('view engine', 'ejs')
 app.set('views', path.join(__dirname, 'views'))

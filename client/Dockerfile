@@ -3,7 +3,7 @@ FROM node:8.2.1
 LABEL authors="oraelosi@fielmann-ventures.com"
 
 # Define environment variables
-ENV NODE_ENV development
+ENV NODE_ENV production
 ENV APP_PORT 1557
 
 # Our app runs on port 1337. Expose it.

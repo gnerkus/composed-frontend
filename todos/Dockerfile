@@ -1,12 +1,12 @@
 FROM node:8.2.1
 
-LABEL authors="oraelosi@fielmann-ventures.com"
+LABEL authors="ifeanyioraelosi@gmail.com"
 
 # Define environment variables
-ENV NODE_ENV development
+ENV NODE_ENV production
 ENV APP_PORT 1447
 
-# Our app runs on port 1337. Expose it.
+# Our app runs on port 1447. Expose it.
 EXPOSE 1447
 
 # Set the new directory as our working directory
@@ -18,4 +18,4 @@ COPY . /src
 RUN npm config set registry http://registry.npmjs.org/ && yarn install
 
 # Serve the application
-CMD ["yarn", "run", "start"]
+CMD ["npm", "run", "serve:production"]
