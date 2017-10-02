@@ -9,6 +9,7 @@ client/npm-debug.log*
 projects/node_modules
 todos/node_modules
 client/node_modules
+file-server/node_modules
 
 # Optional npm cache directory
 projects/.npm
@@ -27,6 +28,9 @@ todos/babel_cache
 # Production bundles
 projects/src/static/js
 todos/src/static/js
+
+# File uploads
+file-server/uploads
 
 # Visual Studio Code files
 .vscode
