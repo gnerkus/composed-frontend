@@ -1,6 +1,6 @@
 FROM node:8.2.1
 
-LABEL authors="oraelosi@fielmann-ventures.com"
+LABEL authors="ifeanyioraelosi@gmail.com"
 
 # Define environment variables
 ENV NODE_ENV production
