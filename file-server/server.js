@@ -52,11 +52,12 @@ app.get('/scripts', (req, res) => {
     })
 })
 
-// Retrieve a Javascript file by id
-app.get('/scripts/:id', (req, res) => {
+// Retrieve a Javascript file by name
+app.get('/scripts/:bundleName', (req, res) => {
   loadCollection(COLLECTION_NAME, db)
     .then(col => {
-      const result = col.get(req.params.id)
+      const bundleName = `${req.params.bundleName}.js`
+      const result = col.findOne({originalname: bundleName})
 
       if (!result) {
         res.sendStatus(404)
