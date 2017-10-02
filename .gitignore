@@ -20,5 +20,13 @@ projects/.node_repl_history
 todos/.node_repl_history
 client/.node_repl_history
 
+# Babel cache files
+projects/babel_cache
+todos/babel_cache
+
+# Production bundles
+projects/src/static/js
+todos/src/static/js
+
 # Visual Studio Code files
 .vscode
