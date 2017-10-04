@@ -5,6 +5,7 @@ services:
     build: ./projects
     links:
       - redis-data
+      - file-server
     ports:
       - 1337
     volumes:
@@ -13,6 +14,7 @@ services:
     build: ./todos
     links:
       - redis-data
+      - file-server
     ports:
       - 1447
     volumes:
@@ -22,6 +24,7 @@ services:
     links:
       - projects
       - todos
+      - file-server
     ports:
       - 1557
     volumes:

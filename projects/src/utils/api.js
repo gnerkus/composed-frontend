@@ -1,9 +1,9 @@
 const fs = require('fs')
 const request = require('request')
 // The file server 'lives' on localhost:1667 (for local testing)
-const FILE_SERVER_URL = 'http://localhost:1667/bundle'
+// const FILE_SERVER_URL = 'http://localhost:1667/bundle'
 // The file serve with Docker Compose running:
-// const FILE_SERVER_URL = 'http://localhost:1667/upload/bundle'
+const FILE_SERVER_URL = 'http://file-server:1667/bundle'
 
 
 class API {
