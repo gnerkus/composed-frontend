@@ -7,7 +7,7 @@ ENV NODE_ENV production
 ENV APP_PORT 1667
 
 # Our app runs on port 1337. Expose it.
-EXPOSE 1557
+EXPOSE 1667
 
 # Set the new directory as our working directory
 WORKDIR /src
