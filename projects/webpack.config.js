@@ -1,5 +1,6 @@
 const webpack = require('webpack')
 const path = require('path')
+const UploadPlugin = require('./src/utils/webpack-upload-plugin')
 
 module.exports = {
   entry: path.join(__dirname, 'src', 'app-client.js'),
@@ -31,6 +32,7 @@ module.exports = {
       sourcemap: false,
       beautify: false,
       dead_code: true
-    })
+    }),
+    new UploadPlugin({jsOnly: true})
   ]
 }
