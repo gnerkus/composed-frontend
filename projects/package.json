@@ -21,6 +21,7 @@
     "react": "15.3.x",
     "react-dom": "15.3.x",
     "redis": "^2.8.0",
+    "request": "^2.83.0",
     "rsmq": "^0.8.2"
   },
   "devDependencies": {
