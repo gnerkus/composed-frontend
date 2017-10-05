@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import express from 'express'express
+import express from 'express'
 import morgan from 'morgan'
 import renderBasket from './cf-basket-basket/render'
 import renderBuy from './cf-basket-buy/render'
