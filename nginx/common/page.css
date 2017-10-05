@@ -204,19 +204,19 @@ dd {
   padding: 15px;
 }
 
-green-recos {
+cf-recos-recos {
   display: block;
   outline: 3px dashed forestgreen;
   width: 100%;
 }
 
-blue-basket {
+cf-basket-basket {
   display: block;
   outline: 3px dashed royalblue;
   padding: 5px;
 }
 
-blue-buy {
+cf-basket-buy {
   display: block;
   outline: 3px dashed royalblue;
   padding: 5px;
