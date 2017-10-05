@@ -1,0 +1,30 @@
+version: '2'
+services:
+  nginx:
+    image: nginx:1-alpine
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/conf.d/nginx.conf
+      - ./nginx/common:/usr/share/nginx/html/common
+    ports:
+      - "3000:3000"
+
+  checkout:
+    build: ./checkout
+    ports:
+      - "3001:3001"
+    volumes:
+      - ./checkout/src:/code/src
+
+  related:
+    build: ./related
+    ports:
+      - "3002:3002"
+    volumes:
+      - ./related/src:/code/src
+
+  catalog:
+    build: ./catalog
+    ports:
+      - "3003:3003"
+    volumes:
+      - ./catalog/src:/code/src
