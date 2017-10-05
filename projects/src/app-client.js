@@ -3,5 +3,5 @@ import ReactDOM from 'react-dom'
 import IndexPage from './components/IndexPage'
 
 window.onload = () => {
-  ReactDOM.render(<IndexPage />, document.getElementById('main'))
+  ReactDOM.render(<IndexPage />, document.getElementById('projects'))
 }
