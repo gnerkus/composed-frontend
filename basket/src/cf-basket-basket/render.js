@@ -1,4 +1,12 @@
+import React from 'react'
+
 export default function renderBasket(count) {
   const classname = count === 0 ? 'empty' : 'filled'
-  return `<div class="${classname}">basket: ${count} item(s)</div>`
+  return React.createElement(
+    'div',
+    {
+      className: classname
+    },
+    `basket: ${count} item(s)`
+  )
 }
