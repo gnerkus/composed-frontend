@@ -1,7 +1,7 @@
 {
   "name": "recommendations",
   "version": "0.1.0",
-  "description": "Basket service for e-commerce composed frontend",
+  "description": "Recommendations service for e-commerce composed frontend",
   "main": "src/server.js",
   "scripts": {
     "build": "webpack -p",

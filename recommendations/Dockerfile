@@ -15,5 +15,5 @@ COPY webpack.config.js /code/
 COPY ./src /code/src
 COPY ./images /code/images
 
-EXPOSE 3001
+EXPOSE 3002
 CMD [ "./node_modules/.bin/nodemon", "--watch", "./src", "--exec", "npm", "start" ]
