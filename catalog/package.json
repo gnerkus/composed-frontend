@@ -1,0 +1,31 @@
+{
+  "name": "catalog",
+  "version": "0.1.0",
+  "description": "Catalog service for e-commerce composed frontend",
+  "main": "src/server.js",
+  "scripts": {
+    "build": "webpack -p",
+    "server": "babel-node --presets env ./src/server.js",
+    "start": "npm run build; npm run server",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "microservice",
+    "frontend"
+  ],
+  "author": "gnerkus <ifeanyioraelosi@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "ejs": "^2.5.7",
+    "express": "^4.16.1",
+    "morgan": "^1.9.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.0",
+    "nodemon": "^1.12.1",
+    "webpack": "^3.6.0"
+  }
+}

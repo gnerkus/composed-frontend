@@ -1,54 +1,30 @@
-version: "3"
-
+version: '2'
 services:
-  projects:
-    build: ./projects
-    links:
-      - redis-data
-      - file-server
-    ports:
-      - 1337
+  nginx:
+    image: nginx:1-alpine
     volumes:
-      - ./projects:/src:rw
-  todos:
-    build: ./todos
-    links:
-      - redis-data
-      - file-server
+      - ./nginx/nginx.conf:/etc/nginx/conf.d/nginx.conf
+      - ./nginx/common:/usr/share/nginx/html/common
     ports:
-      - 1447
+      - "3000:3000"
+
+  basket:
+    build: ./basket
+    ports:
+      - "3001:3001"
     volumes:
-      - ./todos:/src:rw
-  client:
-    build: ./client
-    links:
-      - projects
-      - todos
-      - file-server
+      - ./basket/src:/code/src
+
+  recommendations:
+    build: ./recommendations
     ports:
-      - 1557
+      - "3002:3002"
     volumes:
-      - ./client:/src:rw
-  file-server:
-    build: ./file-server
+      - ./recommendations/src:/code/src
+
+  catalog:
+    build: ./catalog
     ports:
-      - 1667
+      - "3003:3003"
     volumes:
-      - ./file-server:/src:rw
-  reverseproxy:
-    build: ./proxy
-    links:
-      - projects
-      - todos
-      - client
-      - file-server
-    ports:
-      - 1337:1337
-      - 1447:1447
-      - 1557:1557
-      - 1667:1667
-    restart: always
-  redis-data:
-    image: redis
-    ports:
-      - 6379
+      - ./catalog/src:/code/src
