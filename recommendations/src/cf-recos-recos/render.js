@@ -9,5 +9,5 @@ export default function renderRecos(sku = 't_porsche') {
   return `
     <h3>Related Products</h3>
     ${reco.map(id => `<img src="./recommendations/images/reco_${id}.jpg" alt="Reco ${id}" />`).join('')}
-  `;
+  `
 }

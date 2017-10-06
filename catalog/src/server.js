@@ -21,4 +21,4 @@ app.get('/:sku?', (req, res) => {
 
 app.listen(3003);
 console.log(`🔴  catalog running. product page is available here:
->> http://127.0.0.1:3003/`);
+>> http://127.0.0.1:3003/`)

@@ -1,12 +1,12 @@
 /* eslint-disable no-use-before-define, no-console, class-methods-use-this */
 /* globals HTMLElement, window, CustomEvent */
-import render from './render';
+import render from './render'
 
 class BasketBuy extends HTMLElement {
   // These are the attributes that should be watched for changes
   // i.e sku
   static get observedAttributes() {
-    return ['sku'];
+    return ['sku']
   }
   // This is called when a custom element is added to a document
   connectedCallback() {
@@ -17,7 +17,7 @@ class BasketBuy extends HTMLElement {
     this.firstChild.addEventListener('click', this.addToCart)
   }
   addToCart() {
-    window.blue.count += 1
+    window.basket.count += 1
     this.log('event sent "basket:basket:changed"')
     this.dispatchEvent(new CustomEvent('basket:basket:changed', {
       bubbles: true
@@ -44,4 +44,4 @@ class BasketBuy extends HTMLElement {
   }
 }
 
-export default BasketBuy;
+export default BasketBuy
