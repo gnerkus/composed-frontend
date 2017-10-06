@@ -1,18 +1,36 @@
 /* eslint-disable no-console */
 import express from 'express'
 import morgan from 'morgan'
-import renderBasket from './cf-basket-basket/render'
-import renderBuy from './cf-basket-buy/render'
+import { renderToString } from 'react-dom/server'
+import BasketBuy from './cf-basket-buy/BasketBuy'
+import BasketBasket from './cf-basket-basket/BasketBasket'
 
 const app = express()
 app.use(morgan('dev'))
 app.use('/basket', express.static('./build'))
 
 app.use('/cf-basket-buy', (req, res) => {
-  res.send(renderBuy())
+  res.send(
+    renderToString(
+      React.createElement(
+        BasketBuy,
+        null,
+        null
+      )
+    )
+  )
 })
+
 app.use('/cf-basket-basket', (req, res) => {
-  res.send(renderBasket(0))
+  res.send(
+    renderToString(
+      React.createElement(
+        BasketBasket,
+        null,
+        null
+      )
+    )
+  )
 })
 
 app.listen(3001)
