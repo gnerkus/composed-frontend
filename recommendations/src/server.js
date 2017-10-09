@@ -14,7 +14,10 @@ app.use('/cf-recos-recos', (req, res) => {
     renderToString(
       React.createElement(
         RecosRecos,
-        sku: req.query.sku,
+        {
+          id: 'reco',
+          sku: req.query.sku
+        },
         null
       )
     )

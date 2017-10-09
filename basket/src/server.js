@@ -14,7 +14,7 @@ app.use('/cf-basket-buy', (req, res) => {
     renderToString(
       React.createElement(
         BasketBuy,
-        null,
+        {id: 'buy'},
         null
       )
     )
@@ -26,7 +26,7 @@ app.use('/cf-basket-basket', (req, res) => {
     renderToString(
       React.createElement(
         BasketBasket,
-        null,
+        {id: 'basket'},
         null
       )
     )

@@ -1,9 +1,14 @@
 /* globals document, window */
 /* eslint-disable no-use-before-define */
+import React from 'react'
+import ReactDOM from 'react-dom'
+import Page from './page/Page'
 import renderPage from './page/render'
 
+// DONE
 const $app = document.getElementById('app')
 
+// DONE
 window.addEventListener('popstate', () => {
   rerender(window.location.pathname.substr(1))
 })
@@ -39,3 +44,18 @@ function rerender(sku) {
 }
 
 addListeners()
+
+// ReactDOM render will be done here
+
+window.onload = () => {
+  ReactDOM.render(
+    React.createElement(
+      Page,
+      {
+        optionClick: handleClickOption
+      },
+      null
+    ),
+    document.getElementById('app')
+  )
+}
