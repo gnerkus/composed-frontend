@@ -1,23 +1,8 @@
-
 // The catalog service renders the content from the other services
 // (basket, recommendations).
-export default function renderPage(sku = 't_porsche') {
-  const variant = product.variants.find(v => sku === v.sku)
-  if (!variant) { return '<pre>no product not found</pre>' }
-  return `
-    <h1 id="catalog">Catalog</h1>
-    <cf-basket-basket id="basket"><!--#include virtual="/cf-basket-basket" --></cf-basket-basket>
-    <div id="image"><div><img src="${variant.image}" alt="${variant.name}" /></div></div>
-    <h2 id="name">${product.name} <small>${variant.name}</small></h2>
-    <div id="options">${product.variants.map(v => renderOption(v, sku)).join('')}</div>
-    <cf-basket-buy id="buy" sku="${variant.sku}"><!--#include virtual="/cf-basket-buy?sku=${encodeURIComponent(variant.sku)}" --></cf-basket-buy>
-    <cf-recos-recos id="reco" sku="${variant.sku}"><!--#include virtual="/cf-recos-recos?sku=${encodeURIComponent(variant.sku)}" --></cf-recos-recos>
-  `
-}
-
 import React from 'react'
 
-import Option from './Option'
+import ProductOption from './ProductOption'
 
 class Page extends React.Component {
   constructor(props) {
@@ -115,17 +100,19 @@ class Page extends React.Component {
           {id: 'options'},
           this.state.variants.map((variant) => {
             return React.createElement(
-              Option,
+              ProductOption,
               {
                 sku: this.state.sku,
-                variant
+                variant,
+                optionClick: this.optionClick
               }
             )
           })
         ),
         
       ]
-      
+      '<!--#include virtual="/cf-basket-buy" -->',
+      '<!--#include virtual="/cf-recos-recos" -->'
     )
 
     if (!variant) {
@@ -137,6 +124,3 @@ class Page extends React.Component {
 }
 
 export default Page
-
-    <cf-basket-buy id="buy" sku="${variant.sku}"><!--#include virtual="/cf-basket-buy?sku=${encodeURIComponent(variant.sku)}" --></cf-basket-buy>
-    <cf-recos-recos id="reco" sku="${variant.sku}"><!--#include virtual="/cf-recos-recos?sku=${encodeURIComponent(variant.sku)}" --></cf-recos-recos>
