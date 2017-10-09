@@ -14,8 +14,11 @@ class BasketBuy extends React.Component {
   }
 
   componentDidMount() {
-    const sku = this.state.sku
+    const sku = window.location.pathname.substr(1)
     this.log('connected', sku)
+    this.setState({
+      sku
+    })
   }
 
   componentWillUnmount() {
