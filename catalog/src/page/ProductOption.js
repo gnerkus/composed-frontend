@@ -15,7 +15,8 @@ class ProductOption extends React.Component {
         href: `/${variant.sku}`,
         className: active,
         type: 'button',
-        'data-sku': variant.sku
+        'data-sku': variant.sku,
+        onClick: this.props.optionClick
       },
       React.createElement(
         'img',
