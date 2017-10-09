@@ -2,7 +2,8 @@
 import express from 'express'
 import morgan from 'morgan'
 import path from 'path'
-import renderPage from './page/render'
+import { renderString } from 'react-dom/server'
+import Page from './page/Page'
 
 const app = express()
 app.use(morgan('dev'))
@@ -15,8 +16,17 @@ app.use('/catalog', express.static('./build'))
 
 app.get('/:sku?', (req, res) => {
   const sku = req.params.sku
-  const html = renderPage(sku)
-  res.render('layout', { html })
+  const content = renderToString(
+    React.createElement(
+      Page,
+      {
+        sku: req.params.sku
+      },
+      null
+    )
+  )
+
+  res.render('layout', { content })
 })
 
 app.listen(3003);
