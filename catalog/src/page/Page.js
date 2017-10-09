@@ -1,3 +1,4 @@
+/* globals window */
 // The catalog service renders the content from the other services
 // (basket, recommendations).
 import React from 'react'
@@ -39,14 +40,16 @@ class Page extends React.Component {
       ]
     }
 
-    this.optionClick = props.optionClick.bind(this)
+    this.optionClick = props.optionClick
   }
 
   componentWillMount() {
-    const sku = window.location.pathname.substr(1)
-    this.setState({
-      sku
-    })
+    // if (window) {
+    //   const sku = window.location.pathname.substr(1)
+    //   this.setState({
+    //     sku
+    //   })
+    // }
   }
 
   render() {
@@ -57,7 +60,7 @@ class Page extends React.Component {
       'no product found'
     )
 
-    const renderResult = React.createElement(
+    let renderResult = React.createElement(
       'div',
       null,
       [
@@ -109,10 +112,9 @@ class Page extends React.Component {
             )
           })
         ),
-        
+        '<!--#include virtual="/cf-basket-buy" -->',
+        '<!--#include virtual="/cf-recos-recos" -->'
       ]
-      '<!--#include virtual="/cf-basket-buy" -->',
-      '<!--#include virtual="/cf-recos-recos" -->'
     )
 
     if (!variant) {

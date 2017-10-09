@@ -1,5 +1,6 @@
 /* globals document, window */
 /* eslint-disable no-use-before-define */
+/* globals window */
 import React from 'react'
 import ReactDOM from 'react-dom'
 import Page from './page/Page'
