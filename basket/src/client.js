@@ -1,7 +1,4 @@
 /* globals window */
-import BasketBasket from './cf-basket-basket/custom-element'
-import BasketBuy from './cf-basket-buy/custom-element'
-
+import BasketBuy from './cf-basket-buy/BasketBuy'
+import BasketBasket from './cf-basket-basket/BasketBasket'
 window.basket = { count: 0 }
-window.customElements.define('cf-basket-basket', BasketBasket)
-window.customElements.define('cf-basket-buy', BasketBuy)

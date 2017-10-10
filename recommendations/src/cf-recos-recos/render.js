@@ -1,3 +1,5 @@
+import React from 'react'
+
 const recos = {
   t_porsche: ['3', '5', '6'],
   t_fendt: ['3', '6', '4'],
@@ -5,9 +7,18 @@ const recos = {
 }
 
 export default function renderRecos(sku = 't_porsche') {
-  const reco = recos[sku] || [];
-  return `
-    <h3>Related Products</h3>
-    ${reco.map(id => `<img src="./recommendations/images/reco_${id}.jpg" alt="Reco ${id}" />`).join('')}
-  `
+  const reco = recos[sku] || []
+  return React.createElement(
+    'div',
+    null,
+    reco.map(function(elemId) {
+      return React.createElement(
+        'img',
+        {
+          src: `./recommendations/images/reco_${elemId}.jpg`,
+          alt: `Reco ${elemId}`
+        }
+      )
+    })
+  )
 }

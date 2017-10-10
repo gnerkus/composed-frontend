@@ -9,8 +9,21 @@
     <link href="/common/page.css" rel="stylesheet">
   </head>
   <body>
-    <main id="app"><%- html %></main>
-    <script src="/common/document-register-element.js"></script>
+    <main>
+      <h1 id="store">The Model Store</h1>
+      <!--#include virtual="/cf-basket-basket" -->
+      <div id="app"><%- html %></div>
+      <!--#include virtual="/cf-basket-buy" -->
+      <!--#include virtual="/cf-recos-recos" -->
+    </main>
+    <script
+      crossorigin src="https://unpkg.com/react@16/umd/react.production.min.js"
+      async
+    ></script>
+    <script
+      crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"
+      async
+    ></script>
     <script src="/catalog/page.js" async></script>
     <script src="/basket/fragments.js" async></script>
     <script src="/recommendations/fragments.js" async></script>

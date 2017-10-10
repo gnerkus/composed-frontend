@@ -1,4 +1,6 @@
-// data
+/* globals window */
+// The catalog service renders the content from the other services
+// (basket, recommendations).
 const product = {
   name: 'Tractor',
   variants: [
@@ -31,6 +33,7 @@ const product = {
 
 function renderOption(variant, sku) {
   const active = sku === variant.sku ? 'active' : ''
+
   return `
     <a href="/${variant.sku}" class="${active}" type="button" data-sku="${variant.sku}">
       <img src="${variant.thumb}" alt="${variant.name}" />
@@ -38,18 +41,14 @@ function renderOption(variant, sku) {
   `
 }
 
-// The catalog service renders the content from the other services
-// (basket, recommendations).
 export default function renderPage(sku = 't_porsche') {
   const variant = product.variants.find(v => sku === v.sku)
+
   if (!variant) { return '<pre>no product not found</pre>' }
+
   return `
-    <h1 id="catalog">Catalog</h1>
-    <cf-basket-basket id="basket"><!--#include virtual="/cf-basket-basket" --></cf-basket-basket>
     <div id="image"><div><img src="${variant.image}" alt="${variant.name}" /></div></div>
     <h2 id="name">${product.name} <small>${variant.name}</small></h2>
     <div id="options">${product.variants.map(v => renderOption(v, sku)).join('')}</div>
-    <cf-basket-buy id="buy" sku="${variant.sku}"><!--#include virtual="/cf-basket-buy?sku=${encodeURIComponent(variant.sku)}" --></cf-basket-buy>
-    <cf-recos-recos id="reco" sku="${variant.sku}"><!--#include virtual="/cf-recos-recos?sku=${encodeURIComponent(variant.sku)}" --></cf-recos-recos>
   `
 }

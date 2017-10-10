@@ -1,7 +1,9 @@
 /* eslint-disable no-console */
 import express from 'express'
 import morgan from 'morgan'
-import renderRecos from './cf-recos-recos/render'
+import React from 'react'
+import { renderToString } from 'react-dom/server'
+import RecosRecos from './cf-recos-recos/RecosRecos'
 
 const app = express()
 app.use(morgan('dev'))
@@ -9,7 +11,18 @@ app.use('/recommendations/images', express.static('./images'))
 app.use('/recommendations', express.static('./build'))
 
 app.use('/cf-recos-recos', (req, res) => {
-  res.send(renderRecos(req.query.sku))
+  res.send(
+    renderToString(
+      React.createElement(
+        RecosRecos,
+        {
+          id: 'reco',
+          sku: req.query.sku
+        },
+        null
+      )
+    )
+  )
 })
 
 app.listen(3002)

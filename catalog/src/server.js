@@ -16,6 +16,7 @@ app.use('/catalog', express.static('./build'))
 app.get('/:sku?', (req, res) => {
   const sku = req.params.sku
   const html = renderPage(sku)
+
   res.render('layout', { html })
 })
 
