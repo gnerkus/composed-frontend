@@ -1,28 +1,38 @@
 /* globals document, window */
 /* eslint-disable no-use-before-define */
-/* globals window */
-import React from 'react'
-import ReactDOM from 'react-dom'
-import Page from './page/Page'
+import renderPage from './page/render'
 
-// Update the app's URL when an item has been clicked.
-// This is to indicate it has been selected.
+const $app = document.getElementById('app')
+
+window.addEventListener('popstate', () => {
+  rerender(window.location.pathname.substr(1))
+})
+
 function handleClickOption(e) {
   e.preventDefault()
-  const sku = e.target.getAttribute('data-sku')
+  const sku = e.currentTarget.getAttribute('data-sku')
   window.history.pushState(null, null, sku)
+  rerender(sku)
 }
 
-// ReactDOM render will be done here
-window.onload = () => {
-  ReactDOM.render(
-    React.createElement(
-      Page,
-      {
-        optionClick: handleClickOption
-      },
-      null
-    ),
-    document.getElementById('app')
-  )
+function addListeners() {
+  const $btns = $app.querySelectorAll('#options a')
+  Array.prototype.forEach.call($btns, $btn => (
+    $btn.addEventListener('click', handleClickOption)
+  ))
 }
+
+function removeListeners() {
+  const $btns = $app.querySelectorAll('#options a')
+  Array.prototype.forEach.call($btns, $btn => (
+    $btn.removeEventListener('click', handleClickOption)
+  ))
+}
+
+function rerender(sku) {
+  removeListeners()
+  $app.innerHTML = renderPage(sku)
+  addListeners()
+}
+
+addListeners()
