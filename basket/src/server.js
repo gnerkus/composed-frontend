@@ -1,6 +1,7 @@
 /* eslint-disable no-console */
 import express from 'express'
 import morgan from 'morgan'
+import React from 'react'
 import { renderToString } from 'react-dom/server'
 import BasketBuy from './cf-basket-buy/BasketBuy'
 import BasketBasket from './cf-basket-basket/BasketBasket'
@@ -9,7 +10,7 @@ const app = express()
 app.use(morgan('dev'))
 app.use('/basket', express.static('./build'))
 
-app.use('/cf-basket-buy', (req, res) => {
+app.get('/cf-basket-buy', (req, res) => {
   res.send(
     renderToString(
       React.createElement(
@@ -21,7 +22,7 @@ app.use('/cf-basket-buy', (req, res) => {
   )
 })
 
-app.use('/cf-basket-basket', (req, res) => {
+app.get('/cf-basket-basket', (req, res) => {
   res.send(
     renderToString(
       React.createElement(

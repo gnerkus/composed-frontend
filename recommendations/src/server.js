@@ -1,6 +1,7 @@
 /* eslint-disable no-console */
 import express from 'express'
 import morgan from 'morgan'
+import React from 'react'
 import { renderToString } from 'react-dom/server'
 import RecosRecos from './cf-recos-recos/RecosRecos'
 
