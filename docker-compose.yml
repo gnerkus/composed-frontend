@@ -2,6 +2,10 @@ version: '2'
 services:
   nginx:
     image: nginx:1-alpine
+    links:
+      - basket
+      - recommendations
+      - catalog
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/conf.d/nginx.conf
       - ./nginx/common:/usr/share/nginx/html/common
@@ -10,6 +14,8 @@ services:
 
   basket:
     build: ./basket
+    links:
+      - redis-data
     ports:
       - "3001:3001"
     volumes:
@@ -17,6 +23,8 @@ services:
 
   recommendations:
     build: ./recommendations
+    links:
+      - redis-data
     ports:
       - "3002:3002"
     volumes:
@@ -24,7 +32,15 @@ services:
 
   catalog:
     build: ./catalog
+    links:
+      - basket
+      - recommendations
     ports:
       - "3003:3003"
     volumes:
       - ./catalog/src:/code/src
+
+  redis-data:
+    image: redis
+    ports:
+      - 6379
