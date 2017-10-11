@@ -10,14 +10,32 @@ function defaultClickHandler () {
   console.log('default click handler')
 }
 
-export default function renderBuy(sku = 't_porsche', clickHandler = defaultClickHandler) {
+export default function renderBuy(
+  sku = 't_porsche',
+  buyProduct = defaultClickHandler,
+  updateButton = defaultClickHandler
+) {
   const price = prices[sku]
   return React.createElement(
-    'button',
-    {
-      type: 'button',
-      onClick: clickHandler
-    },
-    `buy for ${price}`
+    'div',
+    null,
+    [
+      React.createElement(
+        'button',
+        {
+          type: 'button',
+          onClick: buyProduct
+        },
+        `buy for ${price}`
+      ),
+      React.createElement(
+        'button',
+        {
+          type: 'button',
+          onClick: updateButton
+        },
+        'Update price'
+      )
+    ]
   )
 }
