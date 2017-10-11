@@ -7,23 +7,9 @@ import RecosRecos from './cf-recos-recos/RecosRecos'
 
 const app = express()
 app.use(morgan('dev'))
+
 app.use('/recommendations/images', express.static('./images'))
 app.use('/recommendations', express.static('./build'))
-
-app.use('/cf-recos-recos', (req, res) => {
-  res.send(
-    renderToString(
-      React.createElement(
-        RecosRecos,
-        {
-          id: 'reco',
-          sku: req.query.sku
-        },
-        null
-      )
-    )
-  )
-})
 
 app.listen(3002)
 console.log(`💚 recommendations running. fragments are available here:

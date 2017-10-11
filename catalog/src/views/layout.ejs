@@ -9,12 +9,12 @@
     <link href="/common/page.css" rel="stylesheet">
   </head>
   <body>
-    <main>
+    <main id="app">
       <h1 id="store">The Model Store</h1>
-      <!--#include virtual="/cf-basket-basket" -->
-      <div id="app"><%- html %></div>
-      <!--#include virtual="/cf-basket-buy" -->
-      <!--#include virtual="/cf-recos-recos" -->
+      <div id="basket"></div>
+      <%- html %>
+      <div id="buy"></div>
+      <div id="reco"></div>
     </main>
     <script
       crossorigin src="https://unpkg.com/react@16/umd/react.production.min.js"

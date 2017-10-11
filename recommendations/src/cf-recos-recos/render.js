@@ -6,19 +6,34 @@ const recos = {
   t_eicher: ['1', '8', '7']
 }
 
-export default function renderRecos(sku = 't_porsche') {
+function defaultClickHandler () {
+  console.log('default click handler')
+}
+
+export default function renderRecos(sku = 't_porsche', updateRecos = defaultClickHandler) {
   const reco = recos[sku] || []
   return React.createElement(
     'div',
     null,
-    reco.map(function(elemId) {
-      return React.createElement(
-        'img',
+    [
+      React.createElement(
+        'button',
         {
-          src: `./recommendations/images/reco_${elemId}.jpg`,
-          alt: `Reco ${elemId}`
-        }
+          type: 'button',
+          onClick: updateRecos
+        },
+        'Update recommendations'
       )
-    })
+    ].concat(
+      reco.map(function(elemId) {
+        return React.createElement(
+          'img',
+          {
+            src: `./recommendations/images/reco_${elemId}.jpg`,
+            alt: `Reco ${elemId}`
+          }
+        )
+      })
+    )
   )
 }

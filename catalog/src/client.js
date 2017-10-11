@@ -1,6 +1,7 @@
 /* globals document, window */
 /* eslint-disable no-use-before-define */
 import renderPage from './page/render'
+import API from './services/api'
 
 const $app = document.getElementById('app')
 
@@ -11,8 +12,13 @@ window.addEventListener('popstate', () => {
 function handleClickOption(e) {
   e.preventDefault()
   const sku = e.currentTarget.getAttribute('data-sku')
-  window.history.pushState(null, null, sku)
-  rerender(sku)
+
+  // Send sku to the 'sku' message queue on Redis
+  API
+  .postSKUToMessageQueue(sku)
+  .then(() => {
+    window.history.pushState(null, null, sku)
+  })
 }
 
 function addListeners() {
