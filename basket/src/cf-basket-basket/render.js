@@ -1,12 +1,30 @@
 import React from 'react'
 
-export default function renderBasket(count) {
+function defaultClickHandler () {
+  console.log('default click handler')
+}
+
+export default function renderBasket(count, updateBasket = defaultClickHandler) {
   const classname = count === 0 ? 'empty' : 'filled'
   return React.createElement(
     'div',
-    {
-      className: classname
-    },
-    `basket: ${count} item(s)`
+    null,
+    [
+      React.createElement(
+        'button',
+        {
+          type: 'button',
+          onClick: updateBasket
+        },
+        'Update basket'
+      ),
+      React.createElement(
+        'div',
+        {
+          className: classname
+        },
+        `basket: ${count} item(s)`
+      )
+    ]
   )
 }
