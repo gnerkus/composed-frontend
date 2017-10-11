@@ -1,5 +1,5 @@
 /* eslint-disable no-use-before-define */
-const SERVER_URL = 'http://localhost:3000/catalog'
+const SERVER_URL = 'http://localhost:3000'
 
 class API {
   static postSKUToMessageQueue (sku) {

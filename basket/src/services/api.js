@@ -1,10 +1,10 @@
 /* eslint-disable no-use-before-define */
-const SERVER_URL = 'http://localhost:3000/catalog'
+const SERVER_URL = 'http://localhost:3000'
 
 class API {
   static getSKUFromMessageQueue () {
     return fetch(`${SERVER_URL}/sku`, {
-      method: 'get',
+      method: 'put',
       headers: {
         'Accept': 'application/json, text/plain, */*',
         'Content-Type': 'application/json'

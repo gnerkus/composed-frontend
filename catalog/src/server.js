@@ -3,6 +3,7 @@ import express from 'express'
 import morgan from 'morgan'
 import RedisSMQ from 'rsmq'
 import path from 'path'
+import bodyParser from 'body-parser'
 import renderPage from './page/render'
 
 const app = express()
@@ -12,6 +13,8 @@ app.use(morgan('dev'))
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'ejs')
 
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }))
 app.use('/catalog/images', express.static('./images'))
 app.use('/catalog', express.static('./build'))
 
@@ -35,49 +38,49 @@ app.get('/:sku?', (req, res) => {
   res.render('layout', { html })
 })
 
-// Notify all other services that a tractor has been selected
-app.post('/sku', (req, res, next) => {
-  rsmqClient.sendMessage({qname: 'sku', message: req.body.sku}, (err, resp) => {
-    if (resp) {
-      res.json({msgstatus: 'sent', msgid: resp})
-    } else {
-      res.json({msgstatus: 'not sent'})
-    }
+app.route('/sku')
+  // Update the price in the buy button based on the sku
+  .put((req, res, next) => {
+    rsmqClient.receiveMessage({qname: 'sku'}, (err, resp) => {
+      if (resp.id) {
+        res.json({sku: resp.message})
+      } else {
+        res.json({sku: 't_porsche'})
+      }
+    })
   })
-})
+  // Notify all other services that a tractor has been selected
+  .post((req, res, next) => {
+    rsmqClient.sendMessage({qname: 'sku', message: req.body.sku}, (err, resp) => {
+      if (resp) {
+        res.json({msgstatus: 'sent', msgid: resp})
+      } else {
+        res.json({msgstatus: 'not sent'})
+      }
+    })
+  })
 
-// Update number of items in basket
-app.get('/basket', (req, res, next) => {
-  rsmqClient.receiveMessage({qname: 'basket'}, (err, resp) => {
-    if (resp.id) {
-      res.json({count: resp.message})
-    } else {
-      res.json({count: 0})
-    }
+app.route('/basket')
+  // Update number of items in basket
+  .put((req, res, next) => {
+    rsmqClient.receiveMessage({qname: 'basket'}, (err, resp) => {
+      if (resp.id) {
+        res.json({count: resp.message})
+      } else {
+        res.json({count: 0})
+      }
+    })
   })
-})
-
-// Update the price in the buy button based on the sku
-app.get('/sku', (req, res, next) => {
-  rsmqClient.receiveMessage({qname: 'sku'}, (err, resp) => {
-    if (resp.id) {
-      res.json({sku: resp.message})
-    } else {
-      res.json({sku: 't_porsche'})
-    }
+  // Notify all other services that an object has been added to the basket
+  .post((req, res, next) => {
+    rsmqClient.sendMessage({qname: 'basket', message: req.body.basketCount}, (err, resp) => {
+      if (resp) {
+        res.json({msgstatus: 'sent', msgid: resp})
+      } else {
+        res.json({msgstatus: 'not sent'})
+      }
+    })
   })
-})
-
-// Notify all other services that an object has been added to the basket
-app.post('/basket', (req, res, next) => {
-  rsmqClient.sendMessage({qname: 'basket', message: req.body.basketCount}, (err, resp) => {
-    if (resp) {
-      res.json({msgstatus: 'sent', msgid: resp})
-    } else {
-      res.json({msgstatus: 'not sent'})
-    }
-  })
-})
 
 app.listen(3003);
 console.log(`🔴  catalog running. product page is available here:
