@@ -46,6 +46,39 @@ app.post('/sku', (req, res, next) => {
   })
 })
 
+// Update number of items in basket
+app.get('/basket', (req, res, next) => {
+  rsmqClient.receiveMessage({qname: 'basket'}, (err, resp) => {
+    if (resp.id) {
+      res.json({count: resp.message})
+    } else {
+      res.json({count: 0})
+    }
+  })
+})
+
+// Update the price in the buy button based on the sku
+app.get('/sku', (req, res, next) => {
+  rsmqClient.receiveMessage({qname: 'sku'}, (err, resp) => {
+    if (resp.id) {
+      res.json({sku: resp.message})
+    } else {
+      res.json({sku: 't_porsche'})
+    }
+  })
+})
+
+// Notify all other services that an object has been added to the basket
+app.post('/basket', (req, res, next) => {
+  rsmqClient.sendMessage({qname: 'basket', message: req.body.basketCount}, (err, resp) => {
+    if (resp) {
+      res.json({msgstatus: 'sent', msgid: resp})
+    } else {
+      res.json({msgstatus: 'not sent'})
+    }
+  })
+})
+
 app.listen(3003);
 console.log(`🔴  catalog running. product page is available here:
 >> http://127.0.0.1:3003/`)
