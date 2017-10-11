@@ -18,7 +18,6 @@ function handleClickOption(e) {
   .postSKUToMessageQueue(sku)
   .then(() => {
     window.history.pushState(null, null, sku)
-    rerender(sku)
   })
 }
 
