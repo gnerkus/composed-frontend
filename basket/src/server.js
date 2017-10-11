@@ -10,30 +10,6 @@ const app = express()
 app.use(morgan('dev'))
 app.use('/basket', express.static('./build'))
 
-app.get('/cf-basket-buy', (req, res) => {
-  res.send(
-    renderToString(
-      React.createElement(
-        BasketBuy,
-        {id: 'buy'},
-        null
-      )
-    )
-  )
-})
-
-app.get('/cf-basket-basket', (req, res) => {
-  res.send(
-    renderToString(
-      React.createElement(
-        BasketBasket,
-        {id: 'basket'},
-        null
-      )
-    )
-  )
-})
-
 app.listen(3001)
 
 console.log(`🔵 basket running. fragments are available here:
